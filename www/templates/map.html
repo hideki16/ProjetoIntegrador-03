@@ -1,0 +1,20 @@
+<ion-view title="Mapa de denúncias">
+  <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <ion-content scroll="false">
+      <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="São Paulo, Brazil">
+          </label>
+          <button class="button button-small">
+            Submit
+          </button>
+        </div>
+      </div>
+      <map on-create="mapCreated(map)"></map>
+    </ion-content>
+    <ion-footer-bar class="bar-stable">
+      <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
+    </ion-footer-bar>
+  </ion-content>
+</ion-view>

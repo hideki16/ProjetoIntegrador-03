@@ -9,7 +9,7 @@ angular.module('starter.directives', [])
         link: function ($scope, $element, $attr) {
             function initialize() {
                 var mapOptions = {
-                    center: new google.maps.LatLng(41.85, -87.65),
+                    // center: new google.maps.LatLng(41.85, -87.65),
                     zoom: 18,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -23,8 +23,25 @@ angular.module('starter.directives', [])
                 // To add the marker to the map, call setMap();
                 marker.setMap(map);
 
-                var chicago = {lat: 41.85, lng: -87.65};
-                var indianapolis = {lat: 39.79, lng: -86.14};
+                var central = "Praça da Sé, São Paulo, SP";
+
+                var waypts = [];
+                waypts.push({
+                    location: "Morumbi, São Paulo, SP",
+                    stopover: true
+                });
+                waypts.push({
+                    location: "Pinheiros, São Paulo, SP",
+                    stopover: true
+                });
+                waypts.push({
+                    location: "Santana, São Paulo, SP",
+                    stopover: true
+                });
+                waypts.push({
+                    location: "Mooca, São Paulo, SP",
+                    stopover: true
+                });
 
                 var directionsDisplay = new google.maps.DirectionsRenderer({
                     map: map
@@ -32,8 +49,10 @@ angular.module('starter.directives', [])
 
                 // Set destination, origin and travel mode.
                 var request = {
-                    destination: indianapolis,
-                    origin: chicago,
+                    destination: central,
+                    origin: central,
+                    waypoints: waypts,
+                    optimizeWaypoints: true,
                     travelMode: google.maps.TravelMode.DRIVING
                 };
 

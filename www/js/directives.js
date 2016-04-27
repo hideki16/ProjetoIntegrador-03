@@ -24,10 +24,10 @@ angular.module('starter.directives', [])
                 marker.setMap(map);
 
                 var central = "Praça da Sé, São Paulo, SP";
-
+                var string = "Rua persio Pacheco e Silva"
                 var waypts = [];
                 waypts.push({
-                    location: "Morumbi, São Paulo, SP",
+                    location: string + ", São Paulo, SP",
                     stopover: true
                 });
                 waypts.push({

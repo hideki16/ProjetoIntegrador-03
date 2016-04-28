@@ -31,18 +31,21 @@
       <ion-view title="Mapa de den&#xFA;ncias">
         <ion-content overflow-scroll="true" padding="true" class="has-header">
           <ion-content scroll="false">
+              <div class="list">
+                  <label class="item" ng-repeat="item in locais track by $index">
+                      <span class="input-label">{{$index + 1}}</span>
+                      <span class="input-label">{{item}}</span>
+                      <span class="input-label" ng-click="remover($index)">&times;</span>
+                  </label>
+              </div>
             <div class="list">
                 <div class="list">
                     <label class="item item-input">
-                        <span class="input-label">Origem</span>
-                        <input type="text">
+                        <span class="input-label">Local</span>
+                        <input type="text" ng-model="local">
                     </label>
-                    <label class="item item-input">
-                        <span class="input-label">Destino</span>
-                        <input type="text">
-                    </label>
-                    <button class="button button-small" ng-click="busca()">
-                        Buscar
+                    <button class="button button-small" ng-click="adicionar()">
+                        Adicionar
                     </button>
                 </div>
             </div>

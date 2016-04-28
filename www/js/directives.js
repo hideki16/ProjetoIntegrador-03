@@ -26,22 +26,7 @@ angular.module('starter.directives', [])
                 var central = "Praça da Sé, São Paulo, SP";
                 var string = "Rua persio Pacheco e Silva"
                 var waypts = [];
-                waypts.push({
-                    location: string + ", São Paulo, SP",
-                    stopover: true
-                });
-                waypts.push({
-                    location: "Pinheiros, São Paulo, SP",
-                    stopover: true
-                });
-                waypts.push({
-                    location: "Santana, São Paulo, SP",
-                    stopover: true
-                });
-                waypts.push({
-                    location: "Mooca, São Paulo, SP",
-                    stopover: true
-                });
+
 
                 var directionsDisplay = new google.maps.DirectionsRenderer({
                     map: map
@@ -72,6 +57,9 @@ angular.module('starter.directives', [])
                     e.preventDefault();
                     return false;
                 });
+
+                $scope.$parent.map = map;
+
             }
 
             if (document.readyState === "complete") {
@@ -79,6 +67,58 @@ angular.module('starter.directives', [])
             } else {
                 google.maps.event.addDomListener(window, 'load', initialize);
             }
+
+            $scope.$parent.locais = [];
+            $scope.$parent.local = 'Pinheiros, SP';
+            $scope.$parent.adicionar = function(){
+                local = $scope.$parent.local;
+                if(local == "") return;
+                $scope.$parent.locais.push(local);
+                $scope.$parent.local = "";
+
+            }
+
+            $scope.$parent.remover = function(indice){
+                $scope.$parent.locais.splice(indice, 1);
+            }
+
         }
     }
 });
+
+function refresh(map, locais){
+    var waypts = [];
+
+    for(var local in locais){
+        waypts.push({
+            location: local + ", São Paulo, SP",
+            stopover: true
+        });
+    }
+
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+        map: map
+    });
+
+    var central = "Praça da Sé, São Paulo, SP";
+    var string = "Rua persio Pacheco e Silva"
+
+    // Set destination, origin and travel mode.
+    var request = {
+        destination: central,
+        origin: central,
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.DRIVING
+    };
+
+    // Pass the directions request to the directions service.
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            // Display the route on the map.
+            directionsDisplay.setDirections(response);
+        }
+    });
+    directionsDisplay.setMap(map);
+}
